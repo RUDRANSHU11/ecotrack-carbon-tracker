@@ -141,7 +141,7 @@ src/
 
 ## What's Next
 
-- [ ] Claude AI integration for natural-language activity logging ("I drove 20km and had a steak")
+- [ ] AI integration for natural-language activity logging ("I drove 20km and had a steak")
 - [ ] Weekly email digest with progress summary
 - [ ] Community leaderboard / friend challenges
 - [ ] Offset marketplace integration
@@ -149,8 +149,6 @@ src/
 
 ---
 
-## Built With
-
-Built in one session for the **Carbon Footprint Hackathon** using Claude Code + React + Vercel.
+## Data Sources
 
 Emission data: [Our World in Data](https://ourworldindata.org/carbon-footprint-food-methane) · [IPCC AR6](https://www.ipcc.ch/report/ar6/wg3/) · [EPA](https://www.epa.gov/ghgemissions)
