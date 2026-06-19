@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Leaf, LayoutDashboard, PlusCircle, Lightbulb, Target } from 'lucide-react'
 
 const TABS = [
@@ -57,4 +58,9 @@ export default function Header({ activeTab, setActiveTab }) {
       </div>
     </header>
   )
+}
+
+Header.propTypes = {
+  activeTab: PropTypes.string.isRequired,
+  setActiveTab: PropTypes.func.isRequired,
 }

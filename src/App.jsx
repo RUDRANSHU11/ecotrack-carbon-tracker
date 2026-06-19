@@ -4,13 +4,15 @@ import Dashboard from './components/Dashboard.jsx'
 import LogActivity from './components/LogActivity.jsx'
 import Insights from './components/Insights.jsx'
 import Goals from './components/Goals.jsx'
+import ErrorBoundary from './components/ErrorBoundary.jsx'
 import { useStore } from './hooks/useStore.js'
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard')
-  const { logs, goal, setGoal, profile, addLog, removeLog } = useStore()
+  const { logs, goal, setGoal, addLog, removeLog } = useStore()
 
   return (
+    <ErrorBoundary>
     <div className="min-h-screen bg-gray-50">
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
       <main id="main-content" className="max-w-5xl mx-auto px-4 py-6 pb-24 sm:pb-6">
@@ -31,5 +33,6 @@ export default function App() {
         EcoTrack · Carbon Footprint Tracker · Emission factors from IPCC, EPA & Our World in Data
       </footer>
     </div>
+    </ErrorBoundary>
   )
 }

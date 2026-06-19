@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Target, Edit3, Check, X, Trophy, Zap, Globe } from 'lucide-react'
 import { DAILY_BUDGET_KG } from '../data/emissionFactors.js'
 import { last7DaysSummary, formatKg, totalForDay } from '../utils/calculations.js'
@@ -224,4 +225,18 @@ export default function Goals({ logs, goal, setGoal }) {
       </div>
     </div>
   )
+}
+
+Goals.propTypes = {
+  logs: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    date: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    kg: PropTypes.number.isRequired,
+  })).isRequired,
+  goal: PropTypes.shape({
+    targetKgPerDay: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  setGoal: PropTypes.func.isRequired,
 }

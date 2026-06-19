@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import PropTypes from 'prop-types'
 import { Lightbulb, TrendingUp, Leaf, AlertTriangle, CheckCircle } from 'lucide-react'
 import { CATEGORIES, EMISSION_FACTORS, TIPS, DAILY_BUDGET_KG } from '../data/emissionFactors.js'
 import { groupByCategory, formatKg, topEmissionCategory, last7DaysSummary } from '../utils/calculations.js'
@@ -210,4 +211,15 @@ export default function Insights({ logs, setActiveTab }) {
       </div>
     </div>
   )
+}
+
+Insights.propTypes = {
+  logs: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    date: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    kg: PropTypes.number.isRequired,
+  })).isRequired,
+  setActiveTab: PropTypes.func.isRequired,
 }

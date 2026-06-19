@@ -1,4 +1,5 @@
 import React, { useState, useId } from 'react'
+import PropTypes from 'prop-types'
 import { PlusCircle, Trash2, CheckCircle2 } from 'lucide-react'
 import { EMISSION_FACTORS, CATEGORIES } from '../data/emissionFactors.js'
 import { calcEmission, formatKg, totalForDay } from '../utils/calculations.js'
@@ -199,4 +200,19 @@ export default function LogActivity({ logs, addLog, removeLog }) {
       )}
     </div>
   )
+}
+
+const logShape = PropTypes.shape({
+  id: PropTypes.number,
+  date: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
+  kg: PropTypes.number.isRequired,
+})
+
+LogActivity.propTypes = {
+  logs: PropTypes.arrayOf(logShape).isRequired,
+  addLog: PropTypes.func.isRequired,
+  removeLog: PropTypes.func.isRequired,
 }

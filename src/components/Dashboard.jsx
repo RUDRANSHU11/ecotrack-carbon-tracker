@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend
@@ -205,4 +206,20 @@ export default function Dashboard({ logs, goal, setActiveTab }) {
       </div>
     </div>
   )
+}
+
+Dashboard.propTypes = {
+  logs: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    date: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    kg: PropTypes.number.isRequired,
+  })).isRequired,
+  goal: PropTypes.shape({
+    targetKgPerDay: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  setActiveTab: PropTypes.func.isRequired,
 }
