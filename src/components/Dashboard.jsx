@@ -19,14 +19,14 @@ function StatCard({ icon: Icon, label, value, sub, color = 'forest' }) {
     purple: 'bg-purple-50 border-purple-200 text-purple-700',
   }
   return (
-    <div className={`border rounded-xl p-4 ${colors[color]}`}>
+    <div className={`border rounded-xl p-4 ${colors[color]}`} role="region" aria-label={label}>
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-medium opacity-70 uppercase tracking-wide">{label}</p>
-          <p className="text-2xl font-bold mt-1">{value}</p>
+          <p className="text-xs font-medium opacity-70 uppercase tracking-wide" id={`stat-${label}`}>{label}</p>
+          <p className="text-2xl font-bold mt-1" aria-labelledby={`stat-${label}`}>{value}</p>
           {sub && <p className="text-xs mt-0.5 opacity-60">{sub}</p>}
         </div>
-        <Icon className="w-5 h-5 opacity-60 mt-0.5" />
+        <Icon className="w-5 h-5 opacity-60 mt-0.5" aria-hidden="true" />
       </div>
     </div>
   )
@@ -40,19 +40,26 @@ function BudgetGauge({ percent }) {
     <div className="space-y-1">
       <div className="flex justify-between text-xs text-gray-500">
         <span>0</span>
-        <span className={over ? 'font-bold text-red-600' : 'font-medium text-gray-700'}>
+        <span className={over ? 'font-bold text-red-300' : 'font-medium text-gray-200'}>
           {percent}% of daily budget
         </span>
         <span>{DAILY_BUDGET_KG} kg</span>
       </div>
-      <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
+      <div
+        className="h-3 bg-white/20 rounded-full overflow-hidden"
+        role="progressbar"
+        aria-valuenow={percent}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={`${percent}% of daily carbon budget used`}
+      >
         <div
           className={`h-full rounded-full transition-all duration-700 ${color}`}
           style={{ width: `${clamped}%` }}
         />
       </div>
       {over && (
-        <p className="text-xs text-red-600 font-medium">
+        <p className="text-xs text-red-300 font-medium" role="alert">
           {percent - 100}% over the 1.5°C compatible daily limit
         </p>
       )}
@@ -125,7 +132,8 @@ export default function Dashboard({ logs, goal, setActiveTab }) {
         {todayLogs.length === 0 && (
           <button
             onClick={() => setActiveTab('log')}
-            className="mt-4 w-full py-2 bg-forest-600 hover:bg-forest-500 rounded-xl text-sm font-medium transition-colors"
+            aria-label="Go to Log Activity to add your first activity today"
+            className="mt-4 w-full py-2 bg-forest-600 hover:bg-forest-500 rounded-xl text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-forest-700"
           >
             + Log your first activity today
           </button>
